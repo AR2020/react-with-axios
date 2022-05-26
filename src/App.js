@@ -1,23 +1,65 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import axios from "axios";
+import { Table } from "react-bootstrap";
+import Button from "react-bootstrap/Button";
+import "bootstrap/dist/css/bootstrap.css";
 
 function App() {
+  const [userList, setuserList] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const getuserList = () => {
+    axios.get("https://reqres.in/api/users").then((res) => {
+      setuserList(res.data.data);
+      setLoading(false);
+      console.log(res.data.data);
+    });
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container App">
+      <div className="clearfix"></div>
+      {/* .filter((item, index) => index < 2) */}
+
+      {/* {userList.length === 0 && (
+            <tr>
+              <td className="text-center" colSpan="4">
+                <b>No Data Found to display</b>
+              </td>
+            </tr>
+          )} */}
+      <h4 className="d-inline-block">Clue Mediator</h4>
+      <Button
+        variant="info"
+        size="sm"
+        onClick={getuserList}
+        style={{ color: "white", float: "right" }}
+      >
+        {loading ? "Loading..." : "Get userList"}
+      </Button>
+
+      <Table striped bordered hover>
+        <thead>
+          <tr>
+            {/* <th>#</th> */}
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Avatar</th>
+          </tr>
+        </thead>
+        <tbody>
+          {userList.map((x, i) => (
+            <tr key={i}>
+              <td style={{ color: "red" }}>{x.first_name}</td>
+              <td>{x.last_name}</td>
+              <td>{x.email}</td>
+              <td>
+                <img src={x.avatar} alt="avatar_image" />
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </Table>
     </div>
   );
 }
