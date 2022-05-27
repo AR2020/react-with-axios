@@ -3,6 +3,7 @@ import axios from "axios";
 import { Table } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import "bootstrap/dist/css/bootstrap.css";
+import Sum from "./Sum";
 
 function App() {
   const [userList, setuserList] = useState([]);
@@ -17,6 +18,7 @@ function App() {
 
   return (
     <div className="container App">
+      <Sum />
       <div className="clearfix"></div>
       {/* .filter((item, index) => index < 2) */}
 
