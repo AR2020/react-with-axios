@@ -4,6 +4,7 @@ import { Table } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import "bootstrap/dist/css/bootstrap.css";
 import Sum from "./Sum";
+import Multiply from "./Multiply";
 
 function App() {
   const [userList, setuserList] = useState([]);
@@ -19,6 +20,7 @@ function App() {
   return (
     <div className="container App">
       <Sum />
+      <Multiply />
       <div className="clearfix"></div>
       {/* .filter((item, index) => index < 2) */}
 
